@@ -9,12 +9,14 @@
         </l-icon>
       </l-marker> -->
     </l-map>
+    <Drawer />
   </div>
 </template>
 
 <script>
 import L from 'leaflet';
 import { LMap, LTileLayer, LMarker, LIcon } from 'vue2-leaflet';
+import Drawer from '../components/Drawer.vue';
 
 export default {
   name: 'Home',
@@ -33,7 +35,8 @@ export default {
     LMap,
     LTileLayer,
     LMarker,
-    LIcon
+    LIcon,
+    Drawer
   },
 }
 </script>
