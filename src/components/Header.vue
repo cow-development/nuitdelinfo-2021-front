@@ -19,7 +19,7 @@ export default {
   top: 0;
   width: 100%;
   height: 64px;
-  color: #fff;
+  color: var(--primaryText);
   z-index: 9999;
   display: flex;
   align-items: center;

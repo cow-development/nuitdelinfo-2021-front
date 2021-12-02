@@ -28,7 +28,8 @@ export default {
   transition: width .3s ease;
   .drawer-container {
     height: 100%;
-    background-color: rgb(29, 29, 29);
+    background-color: var(--primaryColor);
+    color: var(--primaryText);
     opacity: .9;
     // box-shadow: 0 0 36px rgb(27, 27, 27);
     border-radius: 24px;
