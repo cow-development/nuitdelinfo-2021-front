@@ -7,7 +7,7 @@
       </span>
     </div>
     <div class="center">
-      center
+      <InputSearch />
     </div>
     <div class="right">
       <Dropdown :list="true">
@@ -44,11 +44,13 @@
 
 <script>
 import Dropdown from './Dropdown.vue'
+import InputSearch from './InputSearch.vue'
 
 export default {
   name: 'CustomHeader',
   components: {
-    Dropdown
+    Dropdown,
+    InputSearch
   }
 }
 </script>
