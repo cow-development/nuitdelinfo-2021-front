@@ -1,0 +1,22 @@
+html, body {
+  margin: 0;
+}
+* {
+  box-sizing: border-box;
+}
+@font-face {
+  font-family: "Pulp Display";
+  src: url("assets/PulpDisplay-Regular.woff");
+}
+@font-face {
+  font-family: "Pulp Display Outlined";
+  src: url("assets/PulpDisplay-Outline.woff");
+}
+
+:root {
+  --primaryColor: #1d1d1d;
+  --secondaryColor: #292929;
+  --primaryText: #fff9f9;
+  --secondaryText: #d8d1d1;
+  --tintText: rgb(255, 101, 101);
+}
