@@ -7,6 +7,7 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "axios": "^0.24.0",
     "leaflet": "^1.7.1",
     "mapbox-gl": "^2.6.1",
     "vue": "^2.6.11",

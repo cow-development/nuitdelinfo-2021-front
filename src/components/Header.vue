@@ -34,7 +34,18 @@
         </template>
         <template v-slot:content>
           <div class="container">
-            Salut comment ça va
+            <div class="login" v-if="!user.token">
+              <input type="text" v-model="username" placeholder="Nom d'utilisateur" />
+              <input type="password" v-model="password" placeholder="Mot de passe" />
+              <div class="buttons">
+                <button @click="signup()">
+                  Inscription
+                </button>
+                <button @click="login()">
+                  Connexion
+                </button>
+              </div>
+            </div>
           </div>
         </template>
       </Dropdown>
@@ -45,9 +56,26 @@
 <script>
 import Dropdown from './Dropdown.vue'
 import InputSearch from './InputSearch.vue'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'CustomHeader',
+  data: () => ({
+    username: '',
+    password: ''
+  }),
+  methods: {
+    ...mapActions(['createUser', 'authUser']),
+    signup() {
+      this.createUser({ username: this.username, password: this.password })
+    },
+    login() {
+      this.authUser({ username: this.username, password: this.password })
+    }
+  },
+  computed: {
+    ...mapGetters(['user'])
+  },
   components: {
     Dropdown,
     InputSearch
@@ -107,6 +135,39 @@ export default {
         gap: 8px;
         img {
           height: 20px;
+        }
+      }
+      .login {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        input {
+          border: none;
+          background-color: var(--secondaryColor);
+          padding: 10px 12px;
+          color: var(--primaryText);
+          border-radius: 4px;
+          font-size: 12px;
+          &:focus {
+            outline: none;
+          }
+        }
+        .buttons {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          gap: 4px;
+          button {
+            background-color: var(--tintColor);
+            border: none;
+            border-radius: 2px;
+            font-size: 12px;
+            font-weight: 500;
+            outline: none;
+            padding: 6px 10px;
+            cursor: pointer;
+          }
         }
       }
     }
