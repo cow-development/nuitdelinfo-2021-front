@@ -24,7 +24,7 @@
         </template>
         <template v-slot:content>
           <div class="container">
-            <div class="flag">
+            <div class="flag" @mousedown="setLocale('en')">
               <img src="../assets/united-kingdom.png" />
               <span class="country">
                 English
@@ -53,7 +53,7 @@
             </div>
             <div class="logout" v-else>
               <button @click="logout()">
-                Deconnexion
+                {{ $t('message.logout') }}
               </button>
             </div>
           </div>
@@ -99,6 +99,10 @@ export default {
     },
     toggleLightTheme() {
       this.toggleTheme(this.lightTheme);
+    },
+    setLocale(locale) {
+      console.log(locale);
+      this.$i18n.locale = locale;
     }
   },
   mounted() {
