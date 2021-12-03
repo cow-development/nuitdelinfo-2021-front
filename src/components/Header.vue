@@ -11,6 +11,10 @@
       <InputSearch />
     </div>
     <div class="right">
+      <label class="switch">
+        <input type="checkbox" @change="toggleLightTheme()" v-model="lightTheme">
+        <span class="slider round"></span>
+      </label>
       <Dropdown :list="true">
         <template v-slot:trigger>
           <div class="flag">
@@ -69,10 +73,11 @@ export default {
   name: 'CustomHeader',
   data: () => ({
     username: 'lolo',
-    password: 'momo'
+    password: 'momo',
+    lightTheme: false
   }),
   methods: {
-    ...mapActions(['createUser', 'authUser', 'verifyUser', 'setUserToken', 'resetUser', 'getRescues', 'toggleDrawer']),
+    ...mapActions(['createUser', 'authUser', 'verifyUser', 'setUserToken', 'resetUser', 'getRescues', 'toggleDrawer', 'toggleTheme']),
     signup() {
       this.createUser({ username: this.username, password: this.password })
     },
@@ -91,6 +96,9 @@ export default {
     },
     toggleDrawerEvent() {
       this.toggleDrawer(!this.drawerStatus);
+    },
+    toggleLightTheme() {
+      this.toggleTheme(this.lightTheme);
     }
   },
   mounted() {
@@ -105,7 +113,7 @@ export default {
   },
   components: {
     Dropdown,
-    InputSearch
+    InputSearch,
   }
 }
 </script>

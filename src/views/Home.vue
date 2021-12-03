@@ -50,7 +50,16 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['rescues'])
+    ...mapGetters(['rescues', 'theme'])
+  },
+  watch: {
+    theme() {
+      if(!this.theme) {
+        this.url = "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png";
+      } else {
+        this.url = "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png";
+      }
+    }
   },
   components: {
     LMap,
