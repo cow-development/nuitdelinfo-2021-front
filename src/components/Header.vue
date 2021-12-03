@@ -18,16 +18,23 @@
       <Dropdown :list="true">
         <template v-slot:trigger>
           <div class="flag">
-            <img src="../assets/france.png" />
+            <img src="../assets/france.png" v-if="$i18n.locale == 'fr'" />
+            <img src="../assets/united-kingdom.png" v-else />
             <i class="material-icons">expand_more</i>
           </div>
         </template>
         <template v-slot:content>
           <div class="container">
-            <div class="flag" @mousedown="setLocale('en')">
+            <div class="flag" @mousedown="setLocale('en')" v-if="$i18n.locale == 'fr'">
               <img src="../assets/united-kingdom.png" />
               <span class="country">
                 English
+              </span>
+            </div>
+            <div class="flag" @mousedown="setLocale('fr')" v-else>
+              <img src="../assets/france.png" />
+              <span class="country">
+                Français
               </span>
             </div>
           </div>
@@ -44,10 +51,10 @@
               <input type="password" v-model="password" placeholder="Mot de passe" />
               <div class="buttons">
                 <button @click="signup()">
-                  Inscription
+                  {{ $t('message.signup') }}
                 </button>
                 <button @click="login()">
-                  Connexion
+                  {{ $t('message.login') }}
                 </button>
               </div>
             </div>
@@ -72,8 +79,8 @@ import jscookie from "js-cookie"
 export default {
   name: 'CustomHeader',
   data: () => ({
-    username: 'lolo',
-    password: 'momo',
+    username: '',
+    password: '',
     lightTheme: false
   }),
   methods: {

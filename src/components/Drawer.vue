@@ -2,11 +2,11 @@
   <div class="drawer" :class="{ active: drawerStatus }">
     <div class="drawer-container">
       <div class="rescue-date" v-if="activeRescue">
-        <p class="title"><i class="material-icons">event</i>Date du sauvetage</p>
+        <p class="title"><i class="material-icons">event</i>{{ $t('message.rescue_date') }}</p>
         {{ activeRescue.rescueDate | dateFormatter }}
       </div>
       <div class="rescuers" v-if="activeRescue">
-        <p class="title"><i class="material-icons">support</i>Sauveteurs</p>
+        <p class="title"><i class="material-icons">support</i>{{ $t('message.rescuers') }}</p>
         <div 
           class="rescuer"
           v-for="(rescuer, index) in activeRescue.rescuers"
@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="rescueds" v-if="activeRescue">
-        <p class="title"><i class="material-icons">people</i>Sauvés</p>
+        <p class="title"><i class="material-icons">people</i>{{ $t('message.rescued') }}</p>
         <div 
           class="rescued"
           v-for="(rescued, index) in activeRescue.rescued"
@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="unrescueds" v-if="activeRescue">
-        <p class="title"><i class="material-icons">person_off</i>Non sauvés</p>
+        <p class="title"><i class="material-icons">person_off</i>{{ $t('message.unrescued') }}</p>
         <div 
           class="unrescued"
           v-for="(unrescued, index) in activeRescue.unrescued"

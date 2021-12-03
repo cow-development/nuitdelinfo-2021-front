@@ -10,12 +10,28 @@ Vue.use(VueI18n)
 const messages = {
   en: {
     message: {
-      logout: 'Logout'
+      logout: 'Logout',
+      signup: 'Signup',
+      login: 'Login',
+      search: 'Search',
+      rescue_date: 'Rescue date',
+      rescuers: 'Rescuers',
+      rescued: 'Rescued',
+      unrescued: 'Unrescued',
+      rescue_from: 'Rescue from'
     }
   },
   fr: {
     message: {
-      logout: 'Déconnexion'
+      logout: 'Déconnexion',
+      signup: 'Inscription',
+      login: 'Connexion',
+      search: 'Recherche',
+      rescue_date: 'Date de sauvetage',
+      rescuers: 'Sauveteurs',
+      rescued: 'Sauvés',
+      unrescued: 'Non sauvés',
+      rescue_from: 'Sauvetage du'
     }
   }
 };
