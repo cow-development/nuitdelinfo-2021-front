@@ -14,11 +14,14 @@
         v-on:click="selectMarker(rescue)"
       >
         <l-icon :icon-anchor="[20, 20]">
-          <div class="marker"></div>
+          <div class="marker" :class="{easter: rescue.type == 'easter'}"></div>
         </l-icon>
       </v-marker>
     </l-map>
     <Drawer />
+    <div class="easter" v-if="craby" @click="craby = false">
+      <img src="../assets/craby.png" />
+    </div>
   </div>
 </template>
 
@@ -41,16 +44,35 @@ export default {
       dragging: false,
     },
     url: "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png",
+    craby: false
   }),
   methods: {
     ...mapActions(['setActiveRescue', 'toggleDrawer']),
     selectMarker(rescue) {
-      this.setActiveRescue(rescue);
-      this.toggleDrawer(true);
+      if(rescue.type == 'easter') {
+        this.triggerEasterEgg();
+      } else {
+        this.setActiveRescue(rescue);
+        this.toggleDrawer(true);
+      }
+    },
+    triggerEasterEgg() {
+      this.craby = true;
     },
   },
   computed: {
     ...mapGetters(['rescues', 'theme'])
+  },
+  mounted() {
+    setTimeout(() => {
+      this.rescues.push({
+        id: 1,
+        location: {
+          coordinates: [52.106971, 2.156567],
+        },
+        type: "easter"
+      });
+    }, 5000);
   },
   watch: {
     theme() {
@@ -78,6 +100,12 @@ export default {
     height: 16px;
     border-radius: 50%;
     border: 2px solid var(--tintColor);
+    &.easter {
+      border: 2px solid #59a8f1 !important;
+      &::after {
+        border: 2px solid #59a8f1 !important;
+      }
+    }
     &::after {
       content: "";
       position: absolute;
@@ -90,6 +118,34 @@ export default {
       pointer-events: none;
       animation: pulse 1s infinite;
     }
+  }
+  > .easter {
+    position: fixed;
+    width: 100%;
+    bottom: -10px;
+    z-index: 9999;
+    animation: dance 7s linear infinite;
+    img {
+      animation: rotate 1s linear infinite alternate;
+    }
+  }
+}
+
+@keyframes dance {
+  0% {
+    transform: translateX(0px)
+  } 50% {
+    transform: translateX(100%)
+  } 100% {
+    transform: translateX(0px)
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(-20deg);
+  } 100% {
+    transform: rotate(20deg);
   }
 }
 
