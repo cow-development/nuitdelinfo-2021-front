@@ -2,12 +2,17 @@
   <div class="home">
     <l-map style="height: 100vh" :zoom="8" :center="[51.106971,  2.356567]" :options="mapOptions">
       <l-tile-layer :url="url"></l-tile-layer>
-      <!-- <l-marker :lat-lng="[51.106971,  2.356567]" :icon="icon"></l-marker>
+      <!-- <l-marker :lat-lng="[51.106971,  2.356567]" :icon="icon"></l-marker> -->
       <l-marker :lat-lng="[51.106971,  2.456567]">
-        <l-icon :icon-anchor="[16, 37]">
-          <img src="../assets/gland.png" />
+        <l-icon :icon-anchor="[20, 20]">
+          <div class="marker"></div>
         </l-icon>
-      </l-marker> -->
+      </l-marker>
+      <l-marker :lat-lng="[52.106971,  3.56567]">
+        <l-icon :icon-anchor="[20, 20]">
+          <div class="marker"></div>
+        </l-icon>
+      </l-marker>
     </l-map>
     <Drawer />
   </div>
@@ -40,3 +45,35 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.home {
+  .marker {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--tintColor);
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 2px solid var(--tintColor);
+      pointer-events: none;
+      animation: pulse 1s infinite;
+    }
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  } 100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+</style>
