@@ -2,7 +2,7 @@ import axios from 'axios'
 import vuexStore from '../store'
 
 const apiAxiosClient = axios.create({
-  baseURL: `${process.env.VUE_APP_API_URL}/api`,
+  baseURL: `${process.env.VUE_APP_BASE_URL}/api`,
 })
 
 console.log(process.env);
