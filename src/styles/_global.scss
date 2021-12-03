@@ -21,3 +21,14 @@ html, body {
   --secondaryText: #aca5a5;
   --tintText: rgb(255, 101, 101);
 }
+
+button {
+  background-color: var(--tintColor);
+  border: none;
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 500;
+  outline: none;
+  padding: 6px 10px;
+  cursor: pointer;
+}

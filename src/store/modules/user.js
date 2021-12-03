@@ -60,15 +60,14 @@ const user = {
      * @returns {Promise}
      */
     verifyUser({ commit, dispatch }, token) {
-      return apiAxiosClient.post('/api-jwt-verify/', { token: token })
+      return apiAxiosClient.get('/public/account/verify')
         .then(response => {
-          const { token, ...data } = response.data.data
+          const { token, ...data } = response.data
           const user = {
             token: token,
             data: data
           }
           commit('AUTH_USER_SUCCESS', user);
-          dispatch('getUserData');
           return response.data
         })
         .catch(error => {
@@ -89,6 +88,9 @@ const user = {
           throw error.message
         })
     },
+    setUserToken({ commit }, token) {
+      commit('SET_USER_TOKEN', token)
+    },
     resetUser({ commit }) {
       commit('RESET_USER')
     }
@@ -102,6 +104,9 @@ const user = {
     },
     SET_USER_DATA(state, data) {
       state.user.data = data;
+    },
+    SET_USER_TOKEN(state, token) {
+      state.user.token = token;
     }
   },
   getters: {
