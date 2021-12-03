@@ -3,7 +3,7 @@
     <div class="left">
       <img id="logo" src="../assets/crabe.png" />
       <span id="title">
-        Crabe cool
+        Crabe.cool
       </span>
     </div>
     <div class="center">
