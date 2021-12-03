@@ -2,7 +2,8 @@ import apiAxiosClient from '../../http'
 
 const rescue = {
   state: () => ({
-    rescues: []
+    rescues: [],
+    activeRescue: null
   }),
   actions: {
     getRescues({ commit }, user) {
@@ -15,31 +16,24 @@ const rescue = {
           throw error.message
         })
     },
-    /**
-     * Appel à l'API pour récupérer les informations de l'utilisateur
-     */
-    getUserData({ commit }, token) {
-      return apiAxiosClient.get('/whoami/')
-        .then(response => {
-          commit('SET_USER_DATA', response.data.data)
-          return response.data
-        })
-        .catch(error => {
-          throw error.message
-        })
-    },
-    resetUser({ commit }) {
-      commit('RESET_USER')
+    setActiveRescue({ commit }, rescue) {
+      commit('SET_ACTIVE_RESCUE', rescue)
     }
   },
   mutations: {
     SET_RESCUES(state, data) {
       state.rescues = data
     },
+    SET_ACTIVE_RESCUE(state, rescue) {
+      state.activeRescue = rescue
+    }
   },
   getters: {
     rescues(state) {
       return state.rescues
+    },
+    activeRescue(state) {
+      return state.activeRescue
     }
   }
 }
