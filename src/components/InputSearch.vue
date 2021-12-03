@@ -2,7 +2,7 @@
   <div class="input-search">
     <input
       type="text"
-      :placeholder="placeholderText"
+      :placeholder="$t('message.search')"
       v-model="search"
       @focus="showResults = true"
       @blur="showResults = false"
@@ -15,7 +15,7 @@
         :key="index"
         @mousedown="selectResult(result)"
       >
-        Sauvetage du {{ result.rescueDate | dateFormatter }}
+        {{ $t('message.rescue_from') }} {{ result.rescueDate | dateFormatter }}
       </div>
     </div>
   </div>
@@ -28,7 +28,6 @@ export default {
   data: () => ({
     search: "",
     showResults: false,
-    placeholderText: "Search",
     results: [],
   }),
   methods: {
