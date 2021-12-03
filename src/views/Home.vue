@@ -10,18 +10,13 @@
       <v-marker
         v-for="rescue in rescues"
         :key="rescue.id"
-        :lat-lng="rescue.coordinates"
+        :lat-lng="rescue.location.coordinates"
         v-on:click="selectMarker(rescue)"
       >
         <l-icon :icon-anchor="[20, 20]">
           <div class="marker"></div>
         </l-icon>
       </v-marker>
-      <!-- <l-marker :lat-lng="[52.106971,  3.56567]">
-        <l-icon :icon-anchor="[20, 20]">
-          <div class="marker"></div>
-        </l-icon>
-      </l-marker> -->
     </l-map>
     <Drawer />
   </div>
@@ -32,6 +27,7 @@ import L from "leaflet";
 import { LMap, LTileLayer, LMarker, LIcon } from "vue2-leaflet";
 import Drawer from "../components/Drawer.vue";
 import Vue from "vue";
+import { mapGetters } from 'vuex';
 
 Vue.component("v-marker", LMarker);
 
@@ -45,21 +41,14 @@ export default {
       dragging: false,
     },
     url: "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png",
-    rescues: [
-      {
-        id: 1,
-        coordinates: [51.106971, 2.456567]
-      },
-      {
-        id: 2,
-        coordinates: [52.106971, 3.566567]
-      }
-    ]
   }),
   methods: {
     selectMarker(rescue) {
       console.log(rescue);
     },
+  },
+  computed: {
+    ...mapGetters(['rescues'])
   },
   components: {
     LMap,

@@ -34,7 +34,23 @@
         </template>
         <template v-slot:content>
           <div class="container">
-            Salut comment ça va
+            <div class="login" v-if="!user.token">
+              <input type="text" v-model="username" placeholder="Nom d'utilisateur" />
+              <input type="password" v-model="password" placeholder="Mot de passe" />
+              <div class="buttons">
+                <button @click="signup()">
+                  Inscription
+                </button>
+                <button @click="login()">
+                  Connexion
+                </button>
+              </div>
+            </div>
+            <div class="logout" v-else>
+              <button @click="logout()">
+                Deconnexion
+              </button>
+            </div>
           </div>
         </template>
       </Dropdown>
@@ -45,9 +61,58 @@
 <script>
 import Dropdown from './Dropdown.vue'
 import InputSearch from './InputSearch.vue'
+import { mapActions, mapGetters } from 'vuex'
+import jscookie from "js-cookie"
 
 export default {
   name: 'CustomHeader',
+  data: () => ({
+    username: 'lolo',
+    password: 'momo'
+  }),
+  methods: {
+    ...mapActions(['createUser', 'authUser', 'verifyUser', 'setUserToken', 'resetUser', 'getRescues']),
+    signup() {
+      this.createUser({ username: this.username, password: this.password })
+    },
+    login() {
+      this.authUser({ username: this.username, password: this.password })
+        .then(() => {
+          jscookie.set('crabecookiecool', this.user.token);
+          this.init();
+        })
+    },
+    logout() {
+      this.resetUser();
+    },
+    init() {
+      this.getRescues();
+    }
+  },
+  mounted() {
+    this.init();
+    if (!this.user.token && jscookie.get('crabecookiecool')) {
+      this.setUserToken(jscookie.get('crabecookiecool'));
+      this.verifyUser()
+    }
+
+    // } else if (jscookie.get('crabecookiecool')) {
+    //   this.setUserToken(jscookie.get('crabecookiecool'));
+    //   this.verifyUser(jscookie.get('crabecookiecool'))
+    //     .then(() => {
+    //       this.init();
+    //     })
+    //     .catch(() => {
+    //       // router.push("/login");
+    //     });
+    // } else {
+      // Login
+      // router.push("/login");
+    // }
+  },
+  computed: {
+    ...mapGetters(['user'])
+  },
   components: {
     Dropdown,
     InputSearch
@@ -107,6 +172,39 @@ export default {
         gap: 8px;
         img {
           height: 20px;
+        }
+      }
+      .login {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        input {
+          border: none;
+          background-color: var(--secondaryColor);
+          padding: 10px 12px;
+          color: var(--primaryText);
+          border-radius: 4px;
+          font-size: 12px;
+          &:focus {
+            outline: none;
+          }
+        }
+        .buttons {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          gap: 4px;
+          button {
+            background-color: var(--tintColor);
+            border: none;
+            border-radius: 2px;
+            font-size: 12px;
+            font-weight: 500;
+            outline: none;
+            padding: 6px 10px;
+            cursor: pointer;
+          }
         }
       }
     }
