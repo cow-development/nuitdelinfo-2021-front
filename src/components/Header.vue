@@ -1,6 +1,7 @@
 <template>
   <div class="header">
     <div class="left">
+      <i class="material-icons" @click="toggleDrawerEvent()">menu</i>
       <img id="logo" src="../assets/crabe.png" />
       <span id="title">
         Crabe.cool
@@ -71,7 +72,7 @@ export default {
     password: 'momo'
   }),
   methods: {
-    ...mapActions(['createUser', 'authUser', 'verifyUser', 'setUserToken', 'resetUser', 'getRescues']),
+    ...mapActions(['createUser', 'authUser', 'verifyUser', 'setUserToken', 'resetUser', 'getRescues', 'toggleDrawer']),
     signup() {
       this.createUser({ username: this.username, password: this.password })
     },
@@ -87,6 +88,9 @@ export default {
     },
     init() {
       this.getRescues();
+    },
+    toggleDrawerEvent() {
+      this.toggleDrawer(!this.drawerStatus);
     }
   },
   mounted() {
@@ -95,23 +99,9 @@ export default {
       this.setUserToken(jscookie.get('crabecookiecool'));
       this.verifyUser()
     }
-
-    // } else if (jscookie.get('crabecookiecool')) {
-    //   this.setUserToken(jscookie.get('crabecookiecool'));
-    //   this.verifyUser(jscookie.get('crabecookiecool'))
-    //     .then(() => {
-    //       this.init();
-    //     })
-    //     .catch(() => {
-    //       // router.push("/login");
-    //     });
-    // } else {
-      // Login
-      // router.push("/login");
-    // }
   },
   computed: {
-    ...mapGetters(['user'])
+    ...mapGetters(['user', 'drawerStatus'])
   },
   components: {
     Dropdown,
@@ -137,6 +127,9 @@ export default {
     display: flex;
     align-items: center;
     gap: 8px;
+    i {
+      cursor: pointer;
+    }
     #logo {
       height: 32px;
     }

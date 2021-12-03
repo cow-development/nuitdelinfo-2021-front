@@ -27,7 +27,7 @@ import L from "leaflet";
 import { LMap, LTileLayer, LMarker, LIcon } from "vue2-leaflet";
 import Drawer from "../components/Drawer.vue";
 import Vue from "vue";
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 Vue.component("v-marker", LMarker);
 
@@ -43,8 +43,10 @@ export default {
     url: "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png",
   }),
   methods: {
+    ...mapActions(['setActiveRescue', 'toggleDrawer']),
     selectMarker(rescue) {
-      console.log(rescue);
+      this.setActiveRescue(rescue);
+      this.toggleDrawer(true);
     },
   },
   computed: {
